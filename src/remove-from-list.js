@@ -22,11 +22,67 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeKFromList(node, element) {
+    // let ogPointer = node;
+    let head = {};
+    let length = 0;
+    // 3, 1, 2, 3 remove 3
+    // node.value = 3; head: {}; current: head{};
+    // => node.value === remove
+    // => node.value === 1; head: {}; current: head{};
+    // => node.value !== remove
+    // => node.value === 2; head: {value: 1, next: null}; current: head{}
+    // => node.value !== remove
+    // => node.value === 3; head: {value: 1, next: { value: 2, next: null}}; current: { value: 2, next: null}
+    // => node.value === remove
+    // => !node; head: {value: 1, next: {value:2, next: null}}; current: {value: 2, next: null}
+    // Проход по полученным нодам
+    // Если  условие выполняется, то
+    //      Сделать голову нового linked list
+    //      добавить новый элемент в конец списка
+
+    while (node) {
+        if (node.value !== element) {
+            if (length === 0) {
+                head.value = node.value;
+                length++;
+            } else {
+                let current = head;
+
+                while (current.next) {
+                    current = current.next;
+                }
+                current.next = {};
+                current.next.value = node.value;
+                current.next.next = null;
+
+                length++;
+            }
+        }
+
+        node = node.next;
+    }
+
+    // let pointer = head;
+    // let given = [];
+    // let result = [];
+
+    // while (ogPointer) {
+    //     given.push(ogPointer.value);
+    //     ogPointer = ogPointer.next;
+    // }
+
+    // while (pointer) {
+    //     result.push(pointer.value);
+    //     pointer = pointer.next;
+    // }
+    // console.log('given list', 'Remove', element);
+    // console.log(given);
+    // console.log('returned list');
+    // console.log(result);
+    return head;
 }
 
 module.exports = {
-  removeKFromList
+    removeKFromList,
 };
